@@ -1,11 +1,14 @@
 {
   "name": "my-app",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "test-fifo": "node scripts/test-fifo.js",
+    "test-sjf": "node scripts/test-sjf.js",
     "lint": "eslint"
   },
   "dependencies": {
