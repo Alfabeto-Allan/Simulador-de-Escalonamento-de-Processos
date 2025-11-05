@@ -1,48 +1,83 @@
 import Output from "../Output.js";
 import Render from "../Render.js";
 
-function sjfComparator(a, b) {
-    if (a.arrival === b.arrival) {
-        return a.remaining - b.remaining; // Shortest job first if arrival times are equal.
+function selectSjf(processList, time) {
+    let p = null;
+    for (let i = 0; i < processList.length; i++) {
+        const proc = processList[i];
+        if (proc.finish !== -1) continue;
+        if (proc.arrival > time) continue;
+
+        if (p == null) {
+            p = proc;
+            continue;
+        }
+
+        if (proc.runtime < p.runtime) {
+            p = proc;
+        }
     }
-    return a.arrival - b.arrival; // Earliest arrival first.
+    return p;
+}
+
+function checkTime(processList, time) {
+    let wait = null;
+    for (let i = 0; i < processList.length; i++) {
+        const proc = processList[i];
+        if (proc.finish !== -1) continue;
+
+        const diff = proc.arrival - time;
+        if (wait === null || diff < wait) {
+            wait = diff;
+            if (wait <= 0) return 0;
+        }
+    }
+    return wait === null ? 0 : Math.max(0, wait);
 }
 
 export default function sjf(processList) {
     if (!Array.isArray(processList)) return [];
 
-    const list = [...processList].sort((a, b) => sjfComparator(a, b));
+    const list = [...processList];
     let time = 0; // CPU time
     let idle = 0;
     let throughput = 0;
 
-    const renderList = [];  
-    for (let i = 0; i < list.length; i++) {
-            const p = list[i];
-            if (p.arrival > time) {
-                idle += p.arrival - time;
-            }
-            time = Math.max(time, p.arrival);
-    
-            while (p.remaining > 0) {
-                const render = new Render(p.id, "exec", time);
-                renderList.push(render);
-    
-                p.remaining = p.remaining - 1;
-                time++;
-            }
+    const renderList = [];
+    let wait = checkTime(processList, time);
+    idle += wait;
+    time += wait;
 
-            p.finish = time - 1;
-            p.turnaround = p.finish - p.arrival;
-            p.wait = p.turnaround - p.runtime;
-            throughput += p.turnaround;
+    let p = selectSjf(list, time);
+    while (p != null) {
+        time = Math.max(time, p.arrival);
 
-            console.log(`Process ${p.id} finished at ${p.finish} with ${p.turnaround} turnaround`);
+        while (p.remaining > 0) {
+            const render = new Render(p.id, "exec", time);
+            renderList.push(render);
+
+            p.remaining = p.remaining - 1;
+            time++;
         }
+
+        p.finish = time - 1;
+        p.turnaround = p.finish - p.arrival;
+        p.wait = p.turnaround - p.runtime;
+        throughput += p.turnaround;
+
+        console.log(
+            `Process ${p.id} finished at ${p.finish} with ${p.turnaround} turnaround`
+        );
+        p = selectSjf(list, time);
+    }
 
     throughput /= list.length;
     const idlePercentage = (idle / time) * 100;
-    console.log(`Throughput: ${throughput.toFixed(2)}.\nIdle Percentage: ${idlePercentage.toFixed(2)}`)
+    console.log(
+        `Throughput: ${throughput.toFixed(
+            2
+        )}.\nIdle Percentage: ${idlePercentage.toFixed(2)}`
+    );
     const output = new Output(renderList, list, throughput, idlePercentage);
 
     return output;

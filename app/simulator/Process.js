@@ -3,7 +3,7 @@ export default class Process {
         this.id = id;
         this.arrival = Number(arrival) || 0;
         this.runtime = Number(runtime) || 1;
-        this.remaining = runtime;
+        this.remaining = this.runtime;
         this.finish = -1;
         this.wait = -1;
         this.priority = priority;
