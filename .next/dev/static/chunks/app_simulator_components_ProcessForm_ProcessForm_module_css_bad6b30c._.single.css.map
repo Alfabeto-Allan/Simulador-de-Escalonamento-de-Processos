@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/app/simulator/components/ProcessForm/ProcessForm.module.css"],"sourcesContent":[".container {\r\n    margin-top: 16px;\r\n}\r\n\r\n.title {\r\n    margin: 0 0 8px 0;\r\n    font-weight: 600;\r\n    color: #0f172a;\r\n}\r\n\r\n.grid {\r\n    display: grid;\r\n    grid-template-columns: repeat(5, 1fr);\r\n    gap: 8px;\r\n}\r\n\r\n.input {\r\n    border: 1px solid #e6e9ee;\r\n    padding: 8px;\r\n    border-radius: 8px;\r\n    font-size: 0.9rem;\r\n}\r\n\r\n.addBtn {\r\n    background: var(--success);\r\n    color: white;\r\n    padding: 8px 12px;\r\n    border: none;\r\n    border-radius: 8px;\r\n    cursor: pointer;\r\n}\r\n\r\n.list {\r\n    margin-top: 10px;\r\n    padding-left: 18px;\r\n    color: #374151;\r\n    font-size: 0.95rem;\r\n}"],"names":[],"mappings":"AAAA;;;;AAIA;;;;;;AAMA;;;;;;AAMA;;;;;;;AAOA;;;;;;;;;AASA"}}]
-}

@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/app/simulator/components/ConfigForm/ConfigForm.module.css"],"sourcesContent":[".row { \r\n    display: flex; \r\n    gap: 12px; \r\n    margin-bottom: 12px; \r\n}\r\n\r\n.field { \r\n    flex: 1; \r\n}\r\n\r\n.label { \r\n    display: block; \r\n    font-size: 0.85rem; \r\n    color: var(--muted); \r\n    margin-bottom: 6px; \r\n}\r\n\r\n.input { \r\n    width: 100%; \r\n    padding: 8px; \r\n    border-radius: 8px; \r\n    border: 1px solid #e6e9ee; \r\n}\r\n"],"names":[],"mappings":"AAAA;;;;;;AAMA;;;;AAIA;;;;;;;AAOA"}}]
-}
