@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 17, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/app/page.module.css [app-rsc] (css module)"],"sourcesContent":["__turbopack_context__.v({\n  \"ctas\": \"page-module__E0kJGG__ctas\",\n  \"intro\": \"page-module__E0kJGG__intro\",\n  \"logo\": \"page-module__E0kJGG__logo\",\n  \"main\": \"page-module__E0kJGG__main\",\n  \"page\": \"page-module__E0kJGG__page\",\n  \"primary\": \"page-module__E0kJGG__primary\",\n  \"secondary\": \"page-module__E0kJGG__secondary\",\n});\n"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA"}}]
+}

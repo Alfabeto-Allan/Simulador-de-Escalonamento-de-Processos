@@ -1,0 +1,26 @@
+/* [project]/app/simulator/components/MetricsTable/MetricsTable.module.css [app-client] (css) */
+.MetricsTable-module__FIE_-a__table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 8px;
+  font-size: .95rem;
+}
+
+.MetricsTable-module__FIE_-a__table th, .MetricsTable-module__FIE_-a__table td {
+  text-align: left;
+  border: 1px solid #e6e9ee;
+  padding: 8px;
+}
+
+.MetricsTable-module__FIE_-a__table thead {
+  background: #f3f4f6;
+}
+
+.MetricsTable-module__FIE_-a__summary {
+  color: #374151;
+  gap: 6px;
+  margin-top: 12px;
+  display: grid;
+}
+
+/*# sourceMappingURL=app_simulator_components_MetricsTable_MetricsTable_module_css_bad6b30c._.single.css.map*/

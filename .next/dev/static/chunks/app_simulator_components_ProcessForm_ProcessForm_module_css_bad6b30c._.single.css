@@ -1,0 +1,41 @@
+/* [project]/app/simulator/components/ProcessForm/ProcessForm.module.css [app-client] (css) */
+.ProcessForm-module__0NP0Iq__container {
+  margin-top: 16px;
+}
+
+.ProcessForm-module__0NP0Iq__title {
+  color: #0f172a;
+  margin: 0 0 8px;
+  font-weight: 600;
+}
+
+.ProcessForm-module__0NP0Iq__grid {
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  display: grid;
+}
+
+.ProcessForm-module__0NP0Iq__input {
+  border: 1px solid #e6e9ee;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: .9rem;
+}
+
+.ProcessForm-module__0NP0Iq__addBtn {
+  background: var(--success);
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.ProcessForm-module__0NP0Iq__list {
+  color: #374151;
+  margin-top: 10px;
+  padding-left: 18px;
+  font-size: .95rem;
+}
+
+/*# sourceMappingURL=app_simulator_components_ProcessForm_ProcessForm_module_css_bad6b30c._.single.css.map*/

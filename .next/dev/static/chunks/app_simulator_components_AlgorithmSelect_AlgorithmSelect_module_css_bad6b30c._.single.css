@@ -1,0 +1,21 @@
+/* [project]/app/simulator/components/AlgorithmSelect/AlgorithmSelect.module.css [app-client] (css) */
+.AlgorithmSelect-module__jzvV7q__wrap {
+  margin-bottom: 12px;
+}
+
+.AlgorithmSelect-module__jzvV7q__label {
+  color: var(--muted);
+  margin-bottom: 6px;
+  font-size: .85rem;
+  display: block;
+}
+
+.AlgorithmSelect-module__jzvV7q__select {
+  background: #fff;
+  border: 1px solid #e6e9ee;
+  border-radius: 8px;
+  width: 200px;
+  padding: 8px;
+}
+
+/*# sourceMappingURL=app_simulator_components_AlgorithmSelect_AlgorithmSelect_module_css_bad6b30c._.single.css.map*/

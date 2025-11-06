@@ -1,66 +1,99 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
+import { useState } from "react";
+import "./globals.css";
 
-export default function Home() {
+import ProcessForm from "./simulator/components/ProcessForm/ProcessForm";
+import ConfigForm from "./simulator/components/ConfigForm/ConfigForm";
+import AlgorithmSelect from "./simulator/components/AlgorithmSelect/AlgorithmSelect";
+import GanttChart from "./simulator/components/GanttChart/GanttChart";
+
+export default function SimulatorPage() {
+  const [processes, setProcesses] = useState([]);
+  const [config, setConfig] = useState({
+    quantum: 2,
+    sobrecarga_contexto: 1,
+    algoritmo: "FCFS",
+  });
+  const [results, setResults] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleSimulate = async () => {
+    try {
+      const response = await fetch("/api/simulate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          algoritmo:
+            config.algoritmo === "FIFO"
+              ? 0
+              : config.algoritmo === "SJF"
+                ? 1
+                : config.algoritmo === "RR"
+                  ? 2
+                  : config.algoritmo === "EDF"
+                    ? 3
+                    : config.algoritmo === "CFS"
+                      ? 4
+                      : 0,
+
+          processos: processes,
+        }),
+      });
+
+      if (!response.ok) {
+        console.error("Resposta não OK:", response.status);
+        return;
+      }
+
+      const data = await response.json();
+      console.log("Resultado da simulação:", data);
+      setResults({
+        renders: data.renderList,
+      });
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+    }
+  };
+
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main className="container">
+      <div className="card">
+        <h1 className="h1">Simulador de Escalonamento</h1>
+
+        <ConfigForm config={config} setConfig={setConfig} />
+        <AlgorithmSelect config={config} setConfig={setConfig} />
+        <ProcessForm processes={processes} setProcesses={setProcesses} />
+
+        <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 16 }}>
+          <button
+            onClick={handleSimulate}
+            disabled={loading}
+            style={{
+              padding: "8px 16px",
+              borderRadius: 10,
+              background: loading ? "#93c5fd" : "var(--accent)",
+              color: "white",
+              border: "none",
+              cursor: loading ? "default" : "pointer",
+            }}
           >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            {loading ? "Simulando..." : "Iniciar Simulação"}
+          </button>
         </div>
-      </main>
-    </div>
+      </div>
+
+      {results && (
+        <>
+          <div className="card" style={{ marginTop: 20 }}>
+            <h2 style={{ margin: 0, fontSize: "1.125rem", fontWeight: 600 }}>Gráfico de Gantt</h2>
+            <div style={{ marginTop: 12 }}>
+              <GanttChart renders={results.renders} />
+            </div>
+          </div>
+
+        </>
+      )}
+    </main>
   );
 }

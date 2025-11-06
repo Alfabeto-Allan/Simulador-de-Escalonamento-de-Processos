@@ -1,0 +1,524 @@
+[00:00:01.647] Server  LOG      ✓ Ready in 1113ms
+[00:00:05.129] Server  LOG      ○ Compiling / ...
+[00:00:06.157] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:32.725] Browser ERROR   ./app/page.js:1:5
+Parsing ecmascript source code failed
+> 1 | meu page está assim:
+    |     ^^^^
+  2 |
+  3 | "use client";
+  4 | import { useState } from "react";
+
+Expected ';', '}' or <eof>
+[00:02:42.728] Browser ERROR   ./app/page.js:1:5
+Parsing ecmascript source code failed
+> 1 | meu page está assim:
+    |     ^^^^
+  2 |
+  3 | "use client";
+  4 | import { useState } from "react";
+
+Expected ';', '}' or <eof>
+[00:03:09.099] Server  LOG      ✓ Compiled in 26ms
+[00:03:33.846] Server  LOG      ✓ Compiled in 8ms
+[00:03:38.818] Server  LOG      ✓ Compiled in 6ms
+[00:04:48.147] Server  LOG      ✓ Compiled in 8ms
+[00:04:52.781] Server  LOG      ✓ Compiled in 428ms
+[00:04:53.109] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:05:03.549] Server  LOG     Process A arrives at 0 with t = 5 and priority 0.
+[00:05:03.552] Server  LOG     Process B arrives at 0 with t = 9 and priority 0.
+[00:05:03.553] Server  LOG     exec render created at time 0 on process A.
+[00:05:03.554] Server  LOG     exec render created at time 1 on process A.
+[00:05:03.557] Server  LOG     exec render created at time 2 on process A.
+[00:05:03.558] Server  LOG     exec render created at time 3 on process A.
+[00:05:03.559] Server  LOG     exec render created at time 4 on process A.
+[00:05:03.560] Server  LOG     Process A finished at 4 with 4 turnaround
+[00:05:03.561] Server  LOG     exec render created at time 5 on process B.
+[00:05:03.561] Server  LOG     exec render created at time 6 on process B.
+[00:05:03.562] Server  LOG     exec render created at time 7 on process B.
+[00:05:03.563] Server  LOG     exec render created at time 8 on process B.
+[00:05:03.564] Server  LOG     exec render created at time 9 on process B.
+[00:05:03.565] Server  LOG     exec render created at time 10 on process B.
+[00:05:03.565] Server  LOG     exec render created at time 11 on process B.
+[00:05:03.567] Server  LOG     exec render created at time 12 on process B.
+[00:05:03.568] Server  LOG     exec render created at time 13 on process B.
+[00:05:03.570] Server  LOG     Process B finished at 13 with 13 turnaround
+[00:05:03.572] Server  LOG     Throughput: 8.50.
+Idle Percentage: 0.00
+[00:05:03.695] Browser LOG     Resultado da simulação: {"contextChanges":0,"idlePercentage":0,"processList":[{"arrival":0,"burst":false,"deadline":null,"finish":4,"id":"A","priority":0,"remaining":0,"runtime":5,"turnaround":4,"wait":-1},{"arrival":0,"burst":false,"deadline":null,"finish":13,"id":"B","priority":0,"remaining":0,"runtime":9,"turnaround":13,"wait":4}],"renderList":[{"id":"A","time":0,"type":"exec"},{"id":"A","time":1,"type":"exec"},{"id":"A","time":2,"type":"exec"},{"id":"A","time":3,"type":"exec"},{"id":"A","time":4,"type":"exec"},{"id":"B","time":5,"type":"exec"},{"id":"B","time":6,"type":"exec"},{"id":"B","time":7,"type":"exec"},{"id":"B","time":8,"type":"exec"},{"id":"B","time":9,"type":"exec"},{"id":"B","time":10,"type":"exec"},{"id":"B","time":11,"type":"exec"},{"id":"B","time":12,"type":"exec"},{"id":"B","time":13,"type":"exec"}],"throughput":8.5}
+[00:06:25.614] Server  LOG      ✓ Compiled in 13ms
+[00:06:26.722] Browser ERROR   ./app/page.js:53:5
+Parsing ecmascript source code failed
+  51 |     console.log("Resultado da simulação:", data);
+  52 |     setResults(data);
+> 53 |   } catch (error) {
+     |     ^^^^^
+  54 |     console.error("Erro na requisição:", error);
+  55 |   }
+  56 | };
+
+Expected a semicolon
+
+Import traces:
+  Client Component Browser:
+    ./app/page.js [Client Component Browser]
+    ./app/page.js [Server Component]
+
+  Client Component SSR:
+    ./app/page.js [Client Component SSR]
+    ./app/page.js [Server Component]
+[00:06:26.722] Browser ERROR   ./app/page.js:50:18
+Parsing ecmascript source code failed
+  48 |     }
+  49 |
+> 50 |     const data = await response.json();
+     |                  ^^^^^
+  51 |     console.log("Resultado da simulação:", data);
+  52 |     setResults(data);
+  53 |   } catch (error) {
+
+await isn't allowed in non-async function
+
+Import traces:
+  Client Component Browser:
+    ./app/page.js [Client Component Browser]
+    ./app/page.js [Server Component]
+
+  Client Component SSR:
+    ./app/page.js [Client Component SSR]
+    ./app/page.js [Server Component]
+[00:06:28.721] Browser ERROR   ./app/page.js:53:5
+Parsing ecmascript source code failed
+  51 |     console.log("Resultado da simulação:", data);
+  52 |     setResults(data);
+> 53 |   } catch (error) {
+     |     ^^^^^
+  54 |     console.error("Erro na requisição:", error);
+  55 |   }
+  56 | };
+
+Expected a semicolon
+
+Import traces:
+  Client Component Browser:
+    ./app/page.js [Client Component Browser]
+    ./app/page.js [Server Component]
+
+  Client Component SSR:
+    ./app/page.js [Client Component SSR]
+    ./app/page.js [Server Component]
+[00:06:28.722] Browser ERROR   ./app/page.js:50:18
+Parsing ecmascript source code failed
+  48 |     }
+  49 |
+> 50 |     const data = await response.json();
+     |                  ^^^^^
+  51 |     console.log("Resultado da simulação:", data);
+  52 |     setResults(data);
+  53 |   } catch (error) {
+
+await isn't allowed in non-async function
+
+Import traces:
+  Client Component Browser:
+    ./app/page.js [Client Component Browser]
+    ./app/page.js [Server Component]
+
+  Client Component SSR:
+    ./app/page.js [Client Component SSR]
+    ./app/page.js [Server Component]
+[00:06:33.207] Server  ERROR    ⨯ ./app/page.js:53:5
+Parsing ecmascript source code failed
+  51 |     console.log("Resultado da simulação:", data);
+  52 |     setResults(data);
+> 53 |   } catch (error) {
+     |     ^^^^^
+  54 |     console.error("Erro na requisição:", error);
+  55 |   }
+  56 | };
+
+Expected a semicolon
+
+Import traces:
+  Client Component Browser:
+    ./app/page.js [Client Component Browser]
+    ./app/page.js [Server Component]
+
+  Client Component SSR:
+    ./app/page.js [Client Component SSR]
+    ./app/page.js [Server Component]
+
+
+
+./app/page.js:50:18
+Parsing ecmascript source code failed
+  48 |     }
+  49 |
+> 50 |     const data = await response.json();
+     |                  ^^^^^
+  51 |     console.log("Resultado da simulação:", data);
+  52 |     setResults(data);
+  53 |   } catch (error) {
+
+await isn't allowed in non-async function
+
+Import traces:
+  Client Component Browser:
+    ./app/page.js [Client Component Browser]
+    ./app/page.js [Server Component]
+
+  Client Component SSR:
+    ./app/page.js [Client Component SSR]
+    ./app/page.js [Server Component]
+
+
+[00:06:33.338] Browser ERROR   ./app/page.js:53:5
+Parsing ecmascript source code failed
+  51 |     console.log("Resultado da simulação:", data);
+  52 |     setResults(data);
+> 53 |   } catch (error) {
+     |     ^^^^^
+  54 |     console.error("Erro na requisição:", error);
+  55 |   }
+  56 | };
+
+Expected a semicolon
+
+Import traces:
+  Client Component Browser:
+    ./app/page.js [Client Component Browser]
+    ./app/page.js [Server Component]
+
+  Client Component SSR:
+    ./app/page.js [Client Component SSR]
+    ./app/page.js [Server Component]
+[00:06:33.338] Browser ERROR   ./app/page.js:50:18
+Parsing ecmascript source code failed
+  48 |     }
+  49 |
+> 50 |     const data = await response.json();
+     |                  ^^^^^
+  51 |     console.log("Resultado da simulação:", data);
+  52 |     setResults(data);
+  53 |   } catch (error) {
+
+await isn't allowed in non-async function
+
+Import traces:
+  Client Component Browser:
+    ./app/page.js [Client Component Browser]
+    ./app/page.js [Server Component]
+
+  Client Component SSR:
+    ./app/page.js [Client Component SSR]
+    ./app/page.js [Server Component]
+[00:06:34.177] Browser ERROR   ./app/page.js:53:5
+Parsing ecmascript source code failed
+  51 |     console.log("Resultado da simulação:", data);
+  52 |     setResults(data);
+> 53 |   } catch (error) {
+     |     ^^^^^
+  54 |     console.error("Erro na requisição:", error);
+  55 |   }
+  56 | };
+
+Expected a semicolon
+
+Import traces:
+  Client Component Browser:
+    ./app/page.js [Client Component Browser]
+    ./app/page.js [Server Component]
+
+  Client Component SSR:
+    ./app/page.js [Client Component SSR]
+    ./app/page.js [Server Component]
+[00:06:34.178] Browser ERROR   ./app/page.js:50:18
+Parsing ecmascript source code failed
+  48 |     }
+  49 |
+> 50 |     const data = await response.json();
+     |                  ^^^^^
+  51 |     console.log("Resultado da simulação:", data);
+  52 |     setResults(data);
+  53 |   } catch (error) {
+
+await isn't allowed in non-async function
+
+Import traces:
+  Client Component Browser:
+    ./app/page.js [Client Component Browser]
+    ./app/page.js [Server Component]
+
+  Client Component SSR:
+    ./app/page.js [Client Component SSR]
+    ./app/page.js [Server Component]
+[00:06:34.345] Browser ERROR   ./app/page.js:53:5
+Parsing ecmascript source code failed
+  51 |     console.log("Resultado da simulação:", data);
+  52 |     setResults(data);
+> 53 |   } catch (error) {
+     |     ^^^^^
+  54 |     console.error("Erro na requisição:", error);
+  55 |   }
+  56 | };
+
+Expected a semicolon
+
+Import traces:
+  Client Component Browser:
+    ./app/page.js [Client Component Browser]
+    ./app/page.js [Server Component]
+
+  Client Component SSR:
+    ./app/page.js [Client Component SSR]
+    ./app/page.js [Server Component]
+[00:06:34.345] Browser ERROR   ./app/page.js:50:18
+Parsing ecmascript source code failed
+  48 |     }
+  49 |
+> 50 |     const data = await response.json();
+     |                  ^^^^^
+  51 |     console.log("Resultado da simulação:", data);
+  52 |     setResults(data);
+  53 |   } catch (error) {
+
+await isn't allowed in non-async function
+
+Import traces:
+  Client Component Browser:
+    ./app/page.js [Client Component Browser]
+    ./app/page.js [Server Component]
+
+  Client Component SSR:
+    ./app/page.js [Client Component SSR]
+    ./app/page.js [Server Component]
+[00:06:35.203] Browser ERROR   ./app/page.js:53:5
+Parsing ecmascript source code failed
+  51 |     console.log("Resultado da simulação:", data);
+  52 |     setResults(data);
+> 53 |   } catch (error) {
+     |     ^^^^^
+  54 |     console.error("Erro na requisição:", error);
+  55 |   }
+  56 | };
+
+Expected a semicolon
+
+Import traces:
+  Client Component Browser:
+    ./app/page.js [Client Component Browser]
+    ./app/page.js [Server Component]
+
+  Client Component SSR:
+    ./app/page.js [Client Component SSR]
+    ./app/page.js [Server Component]
+[00:06:35.203] Browser ERROR   ./app/page.js:50:18
+Parsing ecmascript source code failed
+  48 |     }
+  49 |
+> 50 |     const data = await response.json();
+     |                  ^^^^^
+  51 |     console.log("Resultado da simulação:", data);
+  52 |     setResults(data);
+  53 |   } catch (error) {
+
+await isn't allowed in non-async function
+
+Import traces:
+  Client Component Browser:
+    ./app/page.js [Client Component Browser]
+    ./app/page.js [Server Component]
+
+  Client Component SSR:
+    ./app/page.js [Client Component SSR]
+    ./app/page.js [Server Component]
+[00:06:35.997] Browser ERROR   uncaughtError: Error: ./app/page.js:53:5
+Parsing ecmascript source code failed
+  51 |     console.log("Resultado da simulação:", data);
+  52 |     setResults(data);
+> 53 |   } catch (error) {
+     |     ^^^^^
+  54 |     console.error("Erro na requisição:", error);
+  55 |   }
+  56 | };
+
+Expected a semicolon
+
+Import traces:
+  Client Component Browser:
+    ./app/page.js [Client Component Browser]
+    ./app/page.js [Server Component]
+
+  Client Component SSR:
+    ./app/page.js [Client Component SSR]
+    ./app/page.js [Server Component]
+
+
+[00:06:36.727] Browser ERROR   ./app/page.js:53:5
+Parsing ecmascript source code failed
+  51 |     console.log("Resultado da simulação:", data);
+  52 |     setResults(data);
+> 53 |   } catch (error) {
+     |     ^^^^^
+  54 |     console.error("Erro na requisição:", error);
+  55 |   }
+  56 | };
+
+Expected a semicolon
+
+Import traces:
+  Client Component Browser:
+    ./app/page.js [Client Component Browser]
+    ./app/page.js [Server Component]
+
+  Client Component SSR:
+    ./app/page.js [Client Component SSR]
+    ./app/page.js [Server Component]
+[00:06:36.728] Browser ERROR   ./app/page.js:50:18
+Parsing ecmascript source code failed
+  48 |     }
+  49 |
+> 50 |     const data = await response.json();
+     |                  ^^^^^
+  51 |     console.log("Resultado da simulação:", data);
+  52 |     setResults(data);
+  53 |   } catch (error) {
+
+await isn't allowed in non-async function
+
+Import traces:
+  Client Component Browser:
+    ./app/page.js [Client Component Browser]
+    ./app/page.js [Server Component]
+
+  Client Component SSR:
+    ./app/page.js [Client Component SSR]
+    ./app/page.js [Server Component]
+[00:06:36.728] Browser ERROR   ./app/page.js:53:5
+Parsing ecmascript source code failed
+  51 |     console.log("Resultado da simulação:", data);
+  52 |     setResults(data);
+> 53 |   } catch (error) {
+     |     ^^^^^
+  54 |     console.error("Erro na requisição:", error);
+  55 |   }
+  56 | };
+
+Expected a semicolon
+
+Import traces:
+  Client Component Browser:
+    ./app/page.js [Client Component Browser]
+    ./app/page.js [Server Component]
+
+  Client Component SSR:
+    ./app/page.js [Client Component SSR]
+    ./app/page.js [Server Component]
+[00:06:36.728] Browser ERROR   ./app/page.js:50:18
+Parsing ecmascript source code failed
+  48 |     }
+  49 |
+> 50 |     const data = await response.json();
+     |                  ^^^^^
+  51 |     console.log("Resultado da simulação:", data);
+  52 |     setResults(data);
+  53 |   } catch (error) {
+
+await isn't allowed in non-async function
+
+Import traces:
+  Client Component Browser:
+    ./app/page.js [Client Component Browser]
+    ./app/page.js [Server Component]
+
+  Client Component SSR:
+    ./app/page.js [Client Component SSR]
+    ./app/page.js [Server Component]
+[00:06:58.229] Server  LOG      ✓ Compiled in 16ms
+[00:06:58.638] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:07:44.101] Server  LOG      ✓ Compiled in 17ms
+[00:07:48.637] Server  LOG      ✓ Compiled in 5ms
+[00:08:36.779] Server  LOG      ✓ Compiled in 8ms
+[00:08:43.206] Server  LOG      ✓ Compiled in 7ms
+[00:08:53.764] Server  LOG     Throughput: NaN.
+Idle Percentage: NaN
+[00:08:53.874] Browser LOG     Resultado da simulação: {"contextChanges":0,"idlePercentage":null,"processList":[],"renderList":[],"throughput":null}
+[00:09:03.247] Server  LOG     Process A arrives at 0 with t = 5 and priority 0.
+[00:09:03.248] Server  LOG     Process B arrives at 0 with t = 9 and priority 0.
+[00:09:03.250] Server  LOG     exec render created at time 0 on process A.
+[00:09:03.251] Server  LOG     exec render created at time 1 on process A.
+[00:09:03.254] Server  LOG     exec render created at time 2 on process A.
+[00:09:03.255] Server  LOG     exec render created at time 3 on process A.
+[00:09:03.256] Server  LOG     exec render created at time 4 on process A.
+[00:09:03.258] Server  LOG     Process A finished at 4 with 4 turnaround
+[00:09:03.259] Server  LOG     exec render created at time 5 on process B.
+[00:09:03.260] Server  LOG     exec render created at time 6 on process B.
+[00:09:03.261] Server  LOG     exec render created at time 7 on process B.
+[00:09:03.262] Server  LOG     exec render created at time 8 on process B.
+[00:09:03.264] Server  LOG     exec render created at time 9 on process B.
+[00:09:03.266] Server  LOG     exec render created at time 10 on process B.
+[00:09:03.267] Server  LOG     exec render created at time 11 on process B.
+[00:09:03.269] Server  LOG     exec render created at time 12 on process B.
+[00:09:03.271] Server  LOG     exec render created at time 13 on process B.
+[00:09:03.273] Server  LOG     Process B finished at 13 with 13 turnaround
+[00:09:03.275] Server  LOG     Throughput: 8.50.
+Idle Percentage: 0.00
+[00:09:03.387] Browser LOG     Resultado da simulação: {"contextChanges":0,"idlePercentage":0,"processList":[{"arrival":0,"burst":false,"deadline":null,"finish":4,"id":"A","priority":0,"remaining":0,"runtime":5,"turnaround":4,"wait":-1},{"arrival":0,"burst":false,"deadline":null,"finish":13,"id":"B","priority":0,"remaining":0,"runtime":9,"turnaround":13,"wait":4}],"renderList":[{"id":"A","time":0,"type":"exec"},{"id":"A","time":1,"type":"exec"},{"id":"A","time":2,"type":"exec"},{"id":"A","time":3,"type":"exec"},{"id":"A","time":4,"type":"exec"},{"id":"B","time":5,"type":"exec"},{"id":"B","time":6,"type":"exec"},{"id":"B","time":7,"type":"exec"},{"id":"B","time":8,"type":"exec"},{"id":"B","time":9,"type":"exec"},{"id":"B","time":10,"type":"exec"},{"id":"B","time":11,"type":"exec"},{"id":"B","time":12,"type":"exec"},{"id":"B","time":13,"type":"exec"}],"throughput":8.5}
+[00:09:15.639] Server  LOG      ✓ Compiled in 14ms
+[00:09:20.851] Server  LOG      ✓ Compiled in 15ms
+[00:09:23.273] Server  LOG      ✓ Compiled in 8ms
+[00:09:30.722] Server  LOG     Process A arrives at 0 with t = 5 and priority 0.
+[00:09:30.723] Server  LOG     Process B arrives at 0 with t = 9 and priority 0.
+[00:09:30.724] Server  LOG     exec render created at time 0 on process A.
+[00:09:30.725] Server  LOG     exec render created at time 1 on process A.
+[00:09:30.726] Server  LOG     exec render created at time 2 on process A.
+[00:09:30.728] Server  LOG     exec render created at time 3 on process A.
+[00:09:30.729] Server  LOG     exec render created at time 4 on process A.
+[00:09:30.731] Server  LOG     Process A finished at 4 with 4 turnaround
+[00:09:30.732] Server  LOG     exec render created at time 5 on process B.
+[00:09:30.734] Server  LOG     exec render created at time 6 on process B.
+[00:09:30.736] Server  LOG     exec render created at time 7 on process B.
+[00:09:30.737] Server  LOG     exec render created at time 8 on process B.
+[00:09:30.739] Server  LOG     exec render created at time 9 on process B.
+[00:09:30.741] Server  LOG     exec render created at time 10 on process B.
+[00:09:30.746] Server  LOG     exec render created at time 11 on process B.
+[00:09:30.749] Server  LOG     exec render created at time 12 on process B.
+[00:09:30.751] Server  LOG     exec render created at time 13 on process B.
+[00:09:30.753] Server  LOG     Process B finished at 13 with 13 turnaround
+[00:09:30.755] Server  LOG     Throughput: 8.50.
+Idle Percentage: 0.00
+[00:09:30.872] Browser LOG     Resultado da simulação: {"contextChanges":0,"idlePercentage":0,"processList":[{"arrival":0,"burst":false,"deadline":null,"finish":4,"id":"A","priority":0,"remaining":0,"runtime":5,"turnaround":4,"wait":-1},{"arrival":0,"burst":false,"deadline":null,"finish":13,"id":"B","priority":0,"remaining":0,"runtime":9,"turnaround":13,"wait":4}],"renderList":[{"id":"A","time":0,"type":"exec"},{"id":"A","time":1,"type":"exec"},{"id":"A","time":2,"type":"exec"},{"id":"A","time":3,"type":"exec"},{"id":"A","time":4,"type":"exec"},{"id":"B","time":5,"type":"exec"},{"id":"B","time":6,"type":"exec"},{"id":"B","time":7,"type":"exec"},{"id":"B","time":8,"type":"exec"},{"id":"B","time":9,"type":"exec"},{"id":"B","time":10,"type":"exec"},{"id":"B","time":11,"type":"exec"},{"id":"B","time":12,"type":"exec"},{"id":"B","time":13,"type":"exec"}],"throughput":8.5}
+[00:09:56.785] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:10:11.981] Server  LOG     Process A arrives at 1 with t = 5 and priority 0.
+[00:10:11.982] Server  LOG     Process B arrives at 0 with t = 10 and priority 0.
+[00:10:11.984] Server  LOG     exec render created at time 0 on process B.
+[00:10:11.985] Server  LOG     exec render created at time 1 on process B.
+[00:10:11.986] Server  LOG     exec render created at time 2 on process B.
+[00:10:11.988] Server  LOG     exec render created at time 3 on process B.
+[00:10:11.989] Server  LOG     exec render created at time 4 on process B.
+[00:10:11.990] Server  LOG     exec render created at time 5 on process B.
+[00:10:11.991] Server  LOG     exec render created at time 6 on process B.
+[00:10:11.993] Server  LOG     exec render created at time 7 on process B.
+[00:10:11.994] Server  LOG     exec render created at time 8 on process B.
+[00:10:11.995] Server  LOG     exec render created at time 9 on process B.
+[00:10:11.996] Server  LOG     Process B finished at 9 with 9 turnaround
+[00:10:11.998] Server  LOG     exec render created at time 10 on process A.
+[00:10:12.002] Server  LOG     exec render created at time 11 on process A.
+[00:10:12.003] Server  LOG     exec render created at time 12 on process A.
+[00:10:12.005] Server  LOG     exec render created at time 13 on process A.
+[00:10:12.007] Server  LOG     exec render created at time 14 on process A.
+[00:10:12.009] Server  LOG     Process A finished at 14 with 13 turnaround
+[00:10:12.011] Server  LOG     Throughput: 11.00.
+Idle Percentage: 0.00
+[00:10:12.128] Browser LOG     Resultado da simulação: {"contextChanges":0,"idlePercentage":0,"processList":[{"arrival":1,"burst":false,"deadline":null,"finish":14,"id":"A","priority":0,"remaining":0,"runtime":5,"turnaround":13,"wait":8},{"arrival":0,"burst":false,"deadline":null,"finish":9,"id":"B","priority":0,"remaining":0,"runtime":10,"turnaround":9,"wait":-1}],"renderList":[{"id":"B","time":0,"type":"exec"},{"id":"B","time":1,"type":"exec"},{"id":"B","time":2,"type":"exec"},{"id":"B","time":3,"type":"exec"},{"id":"B","time":4,"type":"exec"},{"id":"B","time":5,"type":"exec"},{"id":"B","time":6,"type":"exec"},{"id":"B","time":7,"type":"exec"},{"id":"B","time":8,"type":"exec"},{"id":"B","time":9,"type":"exec"},{"id":"A","time":10,"type":"exec"},{"id":"A","time":11,"type":"exec"},{"id":"A","time":12,"type":"exec"},{"id":"A","time":13,"type":"exec"},{"id":"A","time":14,"type":"exec"}],"throughput":11}
+[00:10:30.718] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:10:36.810] Server  LOG     Process A arrives at 0 with t = 5 and priority 0.
+[00:10:36.811] Server  LOG     exec render created at time 0 on process A.
+[00:10:36.812] Server  LOG     exec render created at time 1 on process A.
+[00:10:36.814] Server  LOG     exec render created at time 2 on process A.
+[00:10:36.815] Server  LOG     exec render created at time 3 on process A.
+[00:10:36.816] Server  LOG     exec render created at time 4 on process A.
+[00:10:36.817] Server  LOG     Process A finished at 4 with 4 turnaround
+[00:10:36.818] Server  LOG     Throughput: 4.00.
+Idle Percentage: 0.00
+[00:10:36.935] Browser LOG     Resultado da simulação: {"contextChanges":0,"idlePercentage":0,"processList":[{"arrival":0,"burst":false,"deadline":null,"finish":4,"id":"A","priority":0,"remaining":0,"runtime":5,"turnaround":4,"wait":-1}],"renderList":[{"id":"A","time":0,"type":"exec"},{"id":"A","time":1,"type":"exec"},{"id":"A","time":2,"type":"exec"},{"id":"A","time":3,"type":"exec"},{"id":"A","time":4,"type":"exec"}],"throughput":4}
