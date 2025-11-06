@@ -1,0 +1,38 @@
+.container {
+    margin-top: 16px;
+}
+
+.title {
+    margin: 0 0 8px 0;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+}
+
+.input {
+    border: 1px solid #e6e9ee;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.addBtn {
+    background: var(--success);
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.list {
+    margin-top: 10px;
+    padding-left: 18px;
+    color: #374151;
+    font-size: 0.95rem;
+}

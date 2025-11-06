@@ -1,0 +1,23 @@
+.row { 
+    display: flex; 
+    gap: 12px; 
+    margin-bottom: 12px; 
+}
+
+.field { 
+    flex: 1; 
+}
+
+.label { 
+    display: block; 
+    font-size: 0.85rem; 
+    color: var(--muted); 
+    margin-bottom: 6px; 
+}
+
+.input { 
+    width: 100%; 
+    padding: 8px; 
+    border-radius: 8px; 
+    border: 1px solid #e6e9ee; 
+}
