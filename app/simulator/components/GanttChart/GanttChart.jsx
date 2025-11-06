@@ -1,7 +1,7 @@
 "use client";
 import styles from "./GanttChart.module.css";
 
-export default function GanttChart({ renders }) {
+export default function GanttChart({ renders, processes = [] }) {
     if (!renders || renders.length === 0)
         return <p style={{ color: "#6b7280" }}>Nenhum dado para exibir.</p>;
 
@@ -13,18 +13,19 @@ export default function GanttChart({ renders }) {
 
     const getColor = (type) => {
         switch (type) {
-            case "exec":
-                return "#4ade80";
-            case "contexto":
-                return "#f87171";
-            case "deadline":
-                return "#dc2626";
-            default:
-                return "#93c5fd";
+            case "exec": return "#4ade80";
+            case "contexto": return "#f87171";
+            case "deadline": return "#dc2626";
+            default: return "#93c5fd";
         }
     };
 
     const timeSlots = Array.from({ length: totalTimeSlots }, (_, i) => minTime + i);
+
+    const getProcessInfo = (id) => {
+        const p = processes.find(proc => proc.id === id);
+        if (!p) return "";
+    };
 
     return (
         <div className={styles.container}>
@@ -44,48 +45,71 @@ export default function GanttChart({ renders }) {
             </div>
 
             <div className={styles.ganttWrapper}>
-                <div className={styles.ganttContainer}>
-                    <div className={styles.processRows}>
-                        {uniqueProcesses.map(processId => (
-                            <div key={processId} className={styles.processRow}>
-                                <div className={styles.processLabel}>{processId}</div>
-                                <div className={styles.processGantt}>
-                                    {timeSlots.map((time) => {
-                                        const renderAtTime = renders.find(r => 
-                                            r.time === time && r.id === processId
-                                        );
+                <div className={styles.scrollArea}>
+                    <div className={styles.ganttContainer}>
+                        <div className={styles.processRows}>
+                            {uniqueProcesses.map(processId => (
+                                <div key={processId} className={styles.processRow}>
+                                    <div className={styles.processLabel}>
+                                        <b>{processId}</b>
+                                    </div>
+                                    {(() => {
+                                        const process = processes.find(p => p.id === processId);
                                         return (
-                                            <div key={time} className={styles.timeSlot}>
-                                                {renderAtTime && (
-                                                    <div
-                                                        className={styles.quadradinho}
-                                                        style={{ 
-                                                            backgroundColor: getColor(renderAtTime.type) 
-                                                        }}
-                                                    >
-                                                    </div>
-                                                )}
-                                            </div>
+                                            <>
+                                                <div className={styles.processLabel}>{process?.chegada ?? "-"}</div>
+                                                <div className={styles.processLabel}>{process?.execucao ?? "-"}</div>
+                                                <div className={styles.processLabel}>{process?.prioridade ?? "-"}</div>
+                                                <div className={styles.processLabel}>{process?.deadline ?? "-"}</div>
+                                            </>
                                         );
-                                    })}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                                    })()}
 
-                    <div className={styles.timelineWrapper}>
-                        <div className={styles.timelineLabel}></div>
-                        <div className={styles.ruler}>
-                            {timeSlots.map((time) => (
-                                <div key={time} className={styles.rulerUnit}>
-                                    <div className={styles.rulerTick}></div>
-                                    <div className={styles.rulerNumber}>{time + 1}</div>
+                                    <div className={styles.processGantt}>
+                                        {timeSlots.map((time) => {
+                                            const renderAtTime = renders.find(
+                                                (r) => r.time === time && r.id === processId
+                                            );
+                                            return (
+                                                <div key={time} className={styles.timeSlot}>
+                                                    {renderAtTime && (
+                                                        <div
+                                                            className={styles.quadradinho}
+                                                            style={{ backgroundColor: getColor(renderAtTime.type) }}
+                                                        ></div>
+                                                    )}
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
                                 </div>
                             ))}
+                        </div>
+
+                        <div className={styles.timelineWrapper}>
+                            <div className={styles.processRows}>
+                                <div className={styles.processRow}>
+                                    <div className={styles.processLabel}></div>
+                                    <div className={styles.processLabel}></div>
+                                    <div className={styles.processLabel}></div>
+                                    <div className={styles.processLabel}></div>
+                                    <div className={styles.processLabel}></div>
+
+                                    <div className={styles.processGantt}>
+                                        {timeSlots.map((time) => (
+                                            <div key={time} className={styles.rulerUnit}>
+                                                <div className={styles.rulerTick}></div>
+                                                <div className={styles.rulerNumber}>{time + 1}</div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     );
 }

@@ -12,7 +12,7 @@ export default function SimulatorPage() {
   const [config, setConfig] = useState({
     quantum: 2,
     sobrecarga_contexto: 1,
-    algoritmo: "FCFS",
+    algoritmo: "FIFO",
   });
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -88,7 +88,7 @@ export default function SimulatorPage() {
           <div className="card" style={{ marginTop: 20 }}>
             <h2 style={{ margin: 0, fontSize: "1.125rem", fontWeight: 600 }}>Gráfico de Gantt</h2>
             <div style={{ marginTop: 12 }}>
-              <GanttChart renders={results.renders} />
+              <GanttChart renders={results.renders} processes={processes} />
             </div>
           </div>
 

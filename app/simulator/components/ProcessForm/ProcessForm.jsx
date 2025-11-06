@@ -10,16 +10,15 @@ export default function ProcessForm({ processes, setProcesses }) {
         deadline: "",
     });
 
-    // Função para gerar a letra com base no número de processos
     const generateId = (index) => {
         const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        return alphabet[index] || `P${index + 1}`; // caso passe de Z, usa P1, P2, etc.
+        return alphabet[index] || `P${index + 1}`;
     };
 
     const handleAdd = () => {
         if (form.chegada === "" || form.execucao === "") return;
 
-        const newId = generateId(processes.length); // gera letra automática
+        const newId = generateId(processes.length); 
 
         const newProcess = {
             id: newId,
@@ -31,7 +30,6 @@ export default function ProcessForm({ processes, setProcesses }) {
 
         setProcesses([...processes, newProcess]);
 
-        // limpa o formulário, mas sem o campo id
         setForm({
             chegada: "",
             execucao: "",
@@ -76,16 +74,6 @@ export default function ProcessForm({ processes, setProcesses }) {
                     Adicionar
                 </button>
             </div>
-
-            {processes.length > 0 && (
-                <ul className={styles.list}>
-                    {processes.map((p) => (
-                        <li key={p.id}>
-                            Processo {p.id}: chegada {p.chegada}, execução {p.execucao}
-                        </li>
-                    ))}
-                </ul>
-            )}
         </div>
     );
 }
