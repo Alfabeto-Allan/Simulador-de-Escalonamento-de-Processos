@@ -7,6 +7,7 @@ import ConfigForm from "./simulator/components/ConfigForm/ConfigForm";
 import AlgorithmSelect from "./simulator/components/AlgorithmSelect/AlgorithmSelect";
 import GanttChart from "./simulator/components/GanttChart/GanttChart";
 import MetricsPanel from "./simulator/components/MetricsPanel/MetricsPanel";
+import ProcessTable from "./simulator/components/ProcessTable/ProcessTable";
 
 export default function SimulatorPage() {
   const [processes, setProcesses] = useState([]);
@@ -53,6 +54,7 @@ export default function SimulatorPage() {
       console.log("Resultado da simulação:", data);
       setResults({
         renders: data.renderList,
+        processList: data.processList,
         throughput: data.throughput,
         idlePercentage: data.idlePercentage,
         contextChanges: data.contextChanges,
@@ -61,8 +63,6 @@ export default function SimulatorPage() {
       console.error("Erro na requisição:", error);
     }
   };
-
-
 
   return (
     <main className="container">
@@ -103,11 +103,14 @@ export default function SimulatorPage() {
       </div>
 
       {results && (
-        <MetricsPanel
-          throughput={results.throughput}
-          idlePercentage={results.idlePercentage}
-          contextChanges={results.contextChanges}
-        />
+        <>
+          <MetricsPanel
+            throughput={results.throughput}
+            idlePercentage={results.idlePercentage}
+            contextChanges={results.contextChanges}
+          />
+          <ProcessTable processList={results.processList} />
+        </>
       )}
 
 

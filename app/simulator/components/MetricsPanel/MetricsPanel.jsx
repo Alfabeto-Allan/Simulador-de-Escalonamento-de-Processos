@@ -7,6 +7,11 @@ export default function MetricsPanel({ throughput, idlePercentage, contextChange
             <h2 className={styles.title}>Métricas da Simulação</h2>
             <div className={styles.metricsGrid}>
                 <div className={styles.metricBox}>
+                    <span className={styles.metricLabel}>Turnaround</span>
+                    <span className={styles.metricValue}>{throughput?.toFixed(2) ?? "-"}</span>
+                </div>
+
+                <div className={styles.metricBox}>
                     <span className={styles.metricLabel}>Throughput</span>
                     <span className={styles.metricValue}>{throughput?.toFixed(2) ?? "-"}</span>
                 </div>
