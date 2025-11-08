@@ -6,6 +6,7 @@ import ProcessForm from "./simulator/components/ProcessForm/ProcessForm";
 import ConfigForm from "./simulator/components/ConfigForm/ConfigForm";
 import AlgorithmSelect from "./simulator/components/AlgorithmSelect/AlgorithmSelect";
 import GanttChart from "./simulator/components/GanttChart/GanttChart";
+import MetricsPanel from "./simulator/components/MetricsPanel/MetricsPanel";
 
 export default function SimulatorPage() {
   const [processes, setProcesses] = useState([]);
@@ -18,45 +19,48 @@ export default function SimulatorPage() {
   const [loading, setLoading] = useState(false);
 
   const handleSimulate = async () => {
-  try {
-    const response = await fetch("/api/simulate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        algoritmo:
-          config.algoritmo === "FIFO"
-            ? 0
-            : config.algoritmo === "SJF"
-              ? 1
-              : config.algoritmo === "RR"
-                ? 2
-                : config.algoritmo === "EDF"
-                  ? 3
-                  : config.algoritmo === "CFS"
-                    ? 4
-                    : 0,
+    try {
+      const response = await fetch("/api/simulate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          algoritmo:
+            config.algoritmo === "FIFO"
+              ? 0
+              : config.algoritmo === "SJF"
+                ? 1
+                : config.algoritmo === "RR"
+                  ? 2
+                  : config.algoritmo === "EDF"
+                    ? 3
+                    : config.algoritmo === "CFS"
+                      ? 4
+                      : 0,
 
-        processos: processes,
+          processos: processes,
 
-        quantum: config.quantum,
-        overhead: config.sobrecarga_contexto,
-      }),
-    });
+          quantum: config.quantum,
+          overhead: config.sobrecarga_contexto,
+        }),
+      });
 
-    if (!response.ok) {
-      console.error("Resposta não OK:", response.status);
-      return;
+      if (!response.ok) {
+        console.error("Resposta não OK:", response.status);
+        return;
+      }
+
+      const data = await response.json();
+      console.log("Resultado da simulação:", data);
+      setResults({
+        renders: data.renderList,
+        throughput: data.throughput,
+        idlePercentage: data.idlePercentage,
+        contextChanges: data.contextChanges,
+      });
+    } catch (error) {
+      console.error("Erro na requisição:", error);
     }
-
-    const data = await response.json();
-    console.log("Resultado da simulação:", data);
-    setResults({
-      renders: data.renderList,
-    });
-  } catch (error) {
-    console.error("Erro na requisição:", error);
-  }
-};
+  };
 
 
 
@@ -97,6 +101,15 @@ export default function SimulatorPage() {
           <GanttChart renders={results?.renders || []} processes={processes} />
         </div>
       </div>
+
+      {results && (
+        <MetricsPanel
+          throughput={results.throughput}
+          idlePercentage={results.idlePercentage}
+          contextChanges={results.contextChanges}
+        />
+      )}
+
 
     </main>
   );
