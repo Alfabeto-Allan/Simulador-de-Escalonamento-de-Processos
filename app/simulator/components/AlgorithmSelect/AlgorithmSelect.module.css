@@ -1,0 +1,18 @@
+.wrap { 
+    margin-bottom: 12px; 
+}
+
+.label { 
+    display: block; 
+    color: var(--muted); 
+    font-size: 0.85rem; 
+    margin-bottom: 6px; 
+}
+
+.select { 
+    width: 100px; 
+    padding: 8px; 
+    border-radius: 8px; 
+    border: 1px solid #e6e9ee; 
+    background: white; 
+}
