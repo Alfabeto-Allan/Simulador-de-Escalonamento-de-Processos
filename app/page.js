@@ -18,42 +18,46 @@ export default function SimulatorPage() {
   const [loading, setLoading] = useState(false);
 
   const handleSimulate = async () => {
-    try {
-      const response = await fetch("/api/simulate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          algoritmo:
-            config.algoritmo === "FIFO"
-              ? 0
-              : config.algoritmo === "SJF"
-                ? 1
-                : config.algoritmo === "RR"
-                  ? 2
-                  : config.algoritmo === "EDF"
-                    ? 3
-                    : config.algoritmo === "CFS"
-                      ? 4
-                      : 0,
+  try {
+    const response = await fetch("/api/simulate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        algoritmo:
+          config.algoritmo === "FIFO"
+            ? 0
+            : config.algoritmo === "SJF"
+              ? 1
+              : config.algoritmo === "RR"
+                ? 2
+                : config.algoritmo === "EDF"
+                  ? 3
+                  : config.algoritmo === "CFS"
+                    ? 4
+                    : 0,
 
-          processos: processes,
-        }),
-      });
+        processos: processes,
 
-      if (!response.ok) {
-        console.error("Resposta não OK:", response.status);
-        return;
-      }
+        quantum: config.quantum,
+        overhead: config.sobrecarga_contexto,
+      }),
+    });
 
-      const data = await response.json();
-      console.log("Resultado da simulação:", data);
-      setResults({
-        renders: data.renderList,
-      });
-    } catch (error) {
-      console.error("Erro na requisição:", error);
+    if (!response.ok) {
+      console.error("Resposta não OK:", response.status);
+      return;
     }
-  };
+
+    const data = await response.json();
+    console.log("Resultado da simulação:", data);
+    setResults({
+      renders: data.renderList,
+    });
+  } catch (error) {
+    console.error("Erro na requisição:", error);
+  }
+};
+
 
 
   return (

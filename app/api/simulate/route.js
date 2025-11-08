@@ -5,13 +5,13 @@ import Process from "@/app/simulator/Process";
 export async function POST(req) {
     try {
         const data = await req.json();
-        const { processos, algoritmo } = data;
+        const { processos, algoritmo, quantum, overhead } = data;
 
         const processList = processos.map(
             (p) => new Process(p.id, p.chegada, p.execucao, p.prioridade, p.deadline)
         );
 
-        const output = sim(processList, algoritmo);
+        const output = sim(processList, algoritmo, quantum, overhead);
 
         return NextResponse.json({
             renderList: output.renderList,
