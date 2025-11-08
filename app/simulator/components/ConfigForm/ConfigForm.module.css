@@ -1,6 +1,6 @@
 .row { 
     display: flex; 
-    gap: 12px; 
+    gap: 60px; 
     margin-bottom: 12px; 
 }
 
@@ -16,7 +16,7 @@
 }
 
 .input { 
-    width: 100%; 
+    width: 100px; 
     padding: 8px; 
     border-radius: 8px; 
     border: 1px solid #e6e9ee; 

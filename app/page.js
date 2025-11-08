@@ -61,8 +61,10 @@ export default function SimulatorPage() {
       <div className="card">
         <h1 className="h1">Simulador de Escalonamento</h1>
 
-        <ConfigForm config={config} setConfig={setConfig} />
-        <AlgorithmSelect config={config} setConfig={setConfig} />
+        <div style={{ display: "flex", gap: "60px" }}>
+          <AlgorithmSelect config={config} setConfig={setConfig} />
+          <ConfigForm config={config} setConfig={setConfig} />
+        </div>
         <ProcessForm processes={processes} setProcesses={setProcesses} />
 
         <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 16 }}>
@@ -83,17 +85,15 @@ export default function SimulatorPage() {
         </div>
       </div>
 
-      {results && (
-        <>
-          <div className="card" style={{ marginTop: 20 }}>
-            <h2 style={{ margin: 0, fontSize: "1.125rem", fontWeight: 600 }}>Gráfico de Gantt</h2>
-            <div style={{ marginTop: 12 }}>
-              <GanttChart renders={results.renders} processes={processes} />
-            </div>
-          </div>
+      <div className="card" style={{ marginTop: 20 }}>
+        <h2 style={{ margin: 0, fontSize: "1.125rem", fontWeight: 600 }}>
+          Gráfico de Gantt
+        </h2>
+        <div style={{ marginTop: 12 }}>
+          <GanttChart renders={results?.renders || []} processes={processes} />
+        </div>
+      </div>
 
-        </>
-      )}
     </main>
   );
 }

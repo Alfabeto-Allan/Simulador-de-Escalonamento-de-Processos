@@ -4,24 +4,24 @@ import styles from "./ProcessForm.module.css";
 
 export default function ProcessForm({ processes, setProcesses }) {
     const [form, setForm] = useState({
+        id: "",
         chegada: "",
         execucao: "",
         prioridade: "",
         deadline: "",
     });
 
-    const generateId = (index) => {
-        const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        return alphabet[index] || `P${index + 1}`;
-    };
-
     const handleAdd = () => {
-        if (form.chegada === "" || form.execucao === "") return;
+        if (form.id === "" || form.chegada === "" || form.execucao === "") return;
 
-        const newId = generateId(processes.length); 
+        const idExists = processes.some(process => process.id === form.id);
+        if (idExists) {
+            alert("ID já existe! Por favor, use um ID diferente.");
+            return;
+        }
 
         const newProcess = {
-            id: newId,
+            id: form.id,
             chegada: Number(form.chegada),
             execucao: Number(form.execucao),
             prioridade: Number(form.prioridade || 0),
@@ -31,11 +31,18 @@ export default function ProcessForm({ processes, setProcesses }) {
         setProcesses([...processes, newProcess]);
 
         setForm({
+            id: "",
             chegada: "",
             execucao: "",
             prioridade: "",
             deadline: "",
         });
+    };
+
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            handleAdd();
+        }
     };
 
     return (
@@ -45,27 +52,39 @@ export default function ProcessForm({ processes, setProcesses }) {
             <div className={styles.grid}>
                 <input
                     className={styles.input}
+                    placeholder="ID (ex: P1, A, B)"
+                    value={form.id}
+                    onChange={(e) => setForm({ ...form, id: e.target.value.toUpperCase() })}
+                    onKeyPress={handleKeyPress}
+                    autoFocus
+                />
+                <input
+                    className={styles.input}
                     placeholder="chegada"
                     value={form.chegada}
                     onChange={(e) => setForm({ ...form, chegada: e.target.value })}
+                    onKeyPress={handleKeyPress}
                 />
                 <input
                     className={styles.input}
                     placeholder="execução"
                     value={form.execucao}
                     onChange={(e) => setForm({ ...form, execucao: e.target.value })}
+                    onKeyPress={handleKeyPress}
                 />
                 <input
                     className={styles.input}
                     placeholder="prioridade"
                     value={form.prioridade}
                     onChange={(e) => setForm({ ...form, prioridade: e.target.value })}
+                    onKeyPress={handleKeyPress}
                 />
                 <input
                     className={styles.input}
                     placeholder="deadline"
                     value={form.deadline}
                     onChange={(e) => setForm({ ...form, deadline: e.target.value })}
+                    onKeyPress={handleKeyPress}
                 />
             </div>
 
