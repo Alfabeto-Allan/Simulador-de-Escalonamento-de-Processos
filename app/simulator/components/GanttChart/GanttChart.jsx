@@ -40,8 +40,8 @@ export default function GanttChart({ renders = [], processes = [] }) {
     const getColor = (type) => {
         switch (type) {
             case "exec": return "#4ade80";
-            case "contexto": return "#f87171";
-            case "deadline": return "#413f3fff";
+            case "overhead": return "#f87171";
+            case "burst": return "#413f3fff";
             default: return "#dc2626";
         }
     };

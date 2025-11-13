@@ -1,6 +1,8 @@
 import fifo from "./algorithms/fifo.js";
 import sjf from "./algorithms/sjf.js";
 import roundRobin from "./algorithms/roundRobin.js";
+import edf from "./algorithms/edf.js";
+import cfs from "./algorithms/cfs.js";
 
 export function sim(processList, algorithm, quantum = 2, overhead = 1) {
     switch (algorithm) {

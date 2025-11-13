@@ -19,6 +19,12 @@ export default function cfs(processList, overhead) {
     let nextIdx = 0;
     let previous = null;
 
+    for (const p of list) {
+        if (p.vruntime === undefined || p.vruntime === null) p.vruntime = 0;
+        if (p.start === undefined || p.start === null) p.start = -1;
+        if (p.finish === undefined || p.finish === null) p.finish = -1;
+    }
+
     while (completed < totalProcesses) {
         while (nextIdx < list.length && list[nextIdx].arrival <= time) {
             queue.push(list[nextIdx]);
@@ -38,7 +44,7 @@ export default function cfs(processList, overhead) {
             }
         }
 
-        queue.sort((a, b) => a.vruntime - b.vruntime);
+        queue.sort((a, b) => (a.vruntime || 0) - (b.vruntime || 0));
 
         const p = queue.shift();
         if (
@@ -59,10 +65,6 @@ export default function cfs(processList, overhead) {
                 }
             }
             contextChanges++;
-
-            queue.push(p);
-            previous = p;
-            continue;
         }
 
         if (p.start === -1) {
@@ -71,7 +73,7 @@ export default function cfs(processList, overhead) {
         renderList.push(new Render(p.id, "exec", time));
         p.remaining -= 1;
 
-        const priorityFactor = 1.25 ** (1 / p.priority);
+        const priorityFactor = 1024 ** (1 / p.priority);
         p.vruntime += priorityFactor;
 
         time += 1;
@@ -106,6 +108,7 @@ export default function cfs(processList, overhead) {
     const output = new Output(
         renderList,
         list,
+        avgTurnaround,
         throughput,
         idlePercentage,
         contextChanges

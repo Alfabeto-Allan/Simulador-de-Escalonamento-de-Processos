@@ -19,6 +19,11 @@ export default function edf(processList, overhead) {
     let nextIdx = 0;
     let previous = null;
 
+    for (const p of list) {
+        if (p.start === undefined || p.start === null) p.start = -1;
+        if (p.finish === undefined || p.finish === null) p.finish = -1;
+    }
+
     while (completed < totalProcesses) {
         while (nextIdx < list.length && list[nextIdx].arrival <= time) {
             queue.push(list[nextIdx]);
@@ -42,7 +47,12 @@ export default function edf(processList, overhead) {
 
         const p = queue.shift();
 
-        if (previous !== null && p !== previous && previous.finish === -1) {
+        if (
+            previous !== null &&
+            p !== previous &&
+            previous.finish === -1 &&
+            overhead > 0
+        ) {
             for (let h = 0; h < overhead; h++) {
                 renderList.push(new Render(previous.id, "overhead", time));
                 time += 1;
@@ -55,10 +65,6 @@ export default function edf(processList, overhead) {
                 }
             }
             contextChanges++;
-
-            queue.push(p);
-            previous = p;
-            continue;
         }
 
         if (p.start === -1) {
