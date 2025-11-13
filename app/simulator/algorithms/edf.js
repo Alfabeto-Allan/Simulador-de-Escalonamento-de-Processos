@@ -60,6 +60,11 @@ export default function edf(processList, overhead) {
             previous = p;
             continue;
         }
+
+        if (p.start === -1) {
+            p.start = time;
+        }
+
         if (p.deadline >= time) {
             renderList.push(new Render(p.id, "exec", time));
         } else {

@@ -18,8 +18,10 @@ export default function fifo(processList) {
         while (p.remaining > 0) {
             const render = new Render(p.id, "exec", time);
             renderList.push(render);
-
             p.remaining = p.remaining - 1;
+            if (p.start === -1) {
+                p.start = time;
+            }
             time++;
         }
         p.finish = time - 1;

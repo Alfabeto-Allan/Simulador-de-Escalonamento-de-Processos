@@ -65,6 +65,9 @@ export default function cfs(processList, overhead) {
             continue;
         }
 
+        if (p.start === -1) {
+            p.start = time;
+        }
         renderList.push(new Render(p.id, "exec", time));
         p.remaining -= 1;
 

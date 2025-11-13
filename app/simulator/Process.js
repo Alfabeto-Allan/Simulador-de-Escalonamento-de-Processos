@@ -4,6 +4,7 @@ export default class Process {
         this.arrival = Number(arrival) || 0;
         this.runtime = Number(runtime) || 1;
         this.remaining = this.runtime;
+        this.start = -1;
         this.finish = -1;
         this.wait = -1;
         this.priority = priority;
