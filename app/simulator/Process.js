@@ -9,6 +9,7 @@ export default class Process {
         this.priority = priority;
         this.deadline = deadline;
         this.burst = false;
+        this.vruntime = 0;
 
         console.log(
             `Process ${this.id} arrives at ${this.arrival} with t = ${this.runtime} and priority ${this.priority}.`

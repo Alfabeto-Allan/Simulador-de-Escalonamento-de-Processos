@@ -12,6 +12,8 @@ export function sim(processList, algorithm, quantum = 2, overhead = 1) {
             return roundRobin(processList, quantum, overhead);
         case 3:
             return edf(processList, overhead);
+        case 4:
+            return cfs(processList, overhead);
         default:
             throw new Error("ERROR: invalid algorithm selection.");
     }
