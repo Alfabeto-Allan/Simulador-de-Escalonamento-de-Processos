@@ -98,7 +98,11 @@ export default function SimulatorPage() {
           Gráfico de Gantt
         </h2>
         <div style={{ marginTop: 12 }}>
-          <GanttChart renders={results?.renders || []} processes={processes} />
+          <GanttChart
+            renders={results?.renders || []}
+            processes={processes}
+            algorithm={config.algoritmo}
+          />
         </div>
       </div>
 

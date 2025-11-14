@@ -41,6 +41,10 @@ export default function roundRobin(processList, quantum = 2, overhead = 0) {
 
         const p = queue.shift();
 
+        if (p.start === -1) {
+            p.start = time;
+        }
+
         for (let q = 0; q < quantum && p.remaining > 0; q++) {
             renderList.push(new Render(p.id, "exec", time));
             p.remaining -= 1;

@@ -1,7 +1,7 @@
 import Render from "../Render.js";
 import Output from "../Output.js";
 
-export default function edf(processList, overhead) {
+export default function cfs(processList, overhead) {
     if (!Array.isArray(processList)) return new Output([], [], 0, 0, 0);
 
     const list = [...processList];
@@ -20,6 +20,7 @@ export default function edf(processList, overhead) {
     let previous = null;
 
     for (const p of list) {
+        if (p.vruntime === undefined || p.vruntime === null) p.vruntime = 0;
         if (p.start === undefined || p.start === null) p.start = -1;
         if (p.finish === undefined || p.finish === null) p.finish = -1;
     }
@@ -43,10 +44,9 @@ export default function edf(processList, overhead) {
             }
         }
 
-        queue.sort((a, b) => a.deadline - b.deadline);
+        queue.sort((a, b) => (a.vruntime || 0) - (b.vruntime || 0));
 
         const p = queue.shift();
-
         if (
             previous !== null &&
             p !== previous &&
@@ -70,20 +70,17 @@ export default function edf(processList, overhead) {
         if (p.start === -1) {
             p.start = time;
         }
-
-        if (p.deadline >= time) {
-            renderList.push(new Render(p.id, "exec", time));
-        } else {
-            renderList.push(new Render(p.id, "burst", time));
-            p.burst = true;
-        }
-
+        renderList.push(new Render(p.id, "exec", time));
         p.remaining -= 1;
+
+        const priorityFactor = 1024 ** (1 / p.priority);
+        p.vruntime += priorityFactor;
+
         time += 1;
 
         if (p.remaining <= 0) {
             p.finish = time - 1;
-            p.turnaround = p.finish - p.arrival + 1;
+            p.turnaround = p.finish - p.arrival;
             p.wait = p.turnaround - p.runtime;
             throughputSum += p.turnaround;
             completed += 1;
@@ -99,12 +96,13 @@ export default function edf(processList, overhead) {
     const avgTurnaround =
         totalProcesses > 0 ? throughputSum / totalProcesses : 0;
     const idlePercentage = time > 0 ? (idle / time) * 100 : 0;
-    const throughput = processList.length / time;
+    const throughput = time > 0 ? processList.length / time : 0;
+
     console.log(
-        `Turnaround: ${avgTurnaround.toFixed(2)}\n
-            Throughput : ${throughput.toFixed(2)}\n
-            Idle Percentage: ${idlePercentage.toFixed(2)}\n
-            Context Changes: ${contextChanges}`
+        `Average turnaround: ${avgTurnaround.toFixed(2)}\n` +
+            `Throughput: ${throughput.toFixed(2)}\n` +
+            `Idle Percentage: ${idlePercentage.toFixed(2)}\n` +
+            `Context Changes: ${contextChanges}`
     );
 
     const output = new Output(

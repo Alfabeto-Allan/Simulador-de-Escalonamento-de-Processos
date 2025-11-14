@@ -4,11 +4,13 @@ export default class Process {
         this.arrival = Number(arrival) || 0;
         this.runtime = Number(runtime) || 1;
         this.remaining = this.runtime;
+        this.start = -1;
         this.finish = -1;
         this.wait = -1;
         this.priority = priority;
         this.deadline = deadline;
         this.burst = false;
+        this.vruntime = 0;
 
         console.log(
             `Process ${this.id} arrives at ${this.arrival} with t = ${this.runtime} and priority ${this.priority}.`

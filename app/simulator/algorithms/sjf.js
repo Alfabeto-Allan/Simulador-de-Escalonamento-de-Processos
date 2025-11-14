@@ -57,6 +57,9 @@ export default function sjf(processList) {
             renderList.push(render);
 
             p.remaining = p.remaining - 1;
+            if (p.start === -1) {
+                p.start = time;
+            }
             time++;
         }
 
