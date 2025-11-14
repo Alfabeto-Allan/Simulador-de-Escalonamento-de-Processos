@@ -8,7 +8,7 @@ export default class Process {
         this.finish = -1;
         this.wait = -1;
         this.priority = priority;
-        this.deadline = deadline;
+        this.deadline = this.arrival + deadline;
         this.burst = false;
         this.vruntime = 0;
 
