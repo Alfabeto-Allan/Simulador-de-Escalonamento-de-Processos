@@ -73,7 +73,12 @@ export default function SimulatorPage() {
           <AlgorithmSelect config={config} setConfig={setConfig} />
           <ConfigForm config={config} setConfig={setConfig} />
         </div>
-        <ProcessForm processes={processes} setProcesses={setProcesses} />
+        <ProcessForm
+          processes={processes}
+          setProcesses={setProcesses}
+          setResults={setResults}
+        />
+
 
         <div style={{ display: "flex", justifyContent: "flex-end", marginTop: 16 }}>
           <button
