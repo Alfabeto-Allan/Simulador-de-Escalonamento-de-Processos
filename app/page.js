@@ -55,6 +55,7 @@ export default function SimulatorPage() {
       setResults({
         renders: data.renderList,
         processList: data.processList,
+        turnaround: data.turnaround,
         throughput: data.throughput,
         idlePercentage: data.idlePercentage,
         contextChanges: data.contextChanges,
@@ -105,6 +106,7 @@ export default function SimulatorPage() {
       {results && (
         <>
           <MetricsPanel
+            turnaround={results.turnaround}
             throughput={results.throughput}
             idlePercentage={results.idlePercentage}
             contextChanges={results.contextChanges}
