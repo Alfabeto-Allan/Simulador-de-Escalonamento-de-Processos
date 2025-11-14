@@ -39,7 +39,6 @@
 .ganttWrapper {
     width: 100%;
     border: 2px solid #d1d5db;
-    border-radius: 8px;
     background: white;
     overflow-x: auto;
     overflow-y: hidden;
