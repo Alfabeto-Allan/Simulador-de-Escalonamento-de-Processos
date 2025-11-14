@@ -75,8 +75,9 @@ export default function GanttChart({ renders = [], processes = [], algorithm }) 
                                                         key={time}
                                                         className={styles.timeSlot}
                                                         style={
-                                                            algorithm === "EDF" && process?.deadline === time
-                                                                ? { borderRight: "2px solid #ff00f2" }
+                                                            algorithm === "EDF" &&
+                                                                (process?.chegada + process?.deadline) === time
+                                                                ? { borderLeft: "2px solid #ff00f2" }
                                                                 : {}
                                                         }
                                                     >
