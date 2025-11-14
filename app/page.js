@@ -39,7 +39,6 @@ export default function SimulatorPage() {
                       : 0,
 
           processos: processes,
-
           quantum: config.quantum,
           overhead: config.sobrecarga_contexto,
         }),

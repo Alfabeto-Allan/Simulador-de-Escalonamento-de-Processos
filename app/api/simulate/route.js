@@ -16,10 +16,10 @@ export async function POST(req) {
         return NextResponse.json({
             renderList: output.renderList,
             processList: output.processList,
-            turnaround: output.turnaround,
             throughput: output.throughput,
             idlePercentage: output.idlePercentage,
             contextChanges: output.contextChanges,
+            turnaround: output.turnaround || 0,
         });
     } catch (err) {
         console.error("Erro na simulação:", err);

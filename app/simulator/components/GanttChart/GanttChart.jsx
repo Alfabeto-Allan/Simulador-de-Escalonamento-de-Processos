@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react"; 
+import { useState, useEffect } from "react";
 import styles from "./GanttChart.module.css";
 
 export default function GanttChart({ renders = [], processes = [] }) {
@@ -41,7 +41,7 @@ export default function GanttChart({ renders = [], processes = [] }) {
         switch (type) {
             case "exec": return "#4ade80";
             case "contexto": return "#f87171";
-            case "deadline": return "#413f3fff";
+            case "burst": return "#413f3fff";
             default: return "#dc2626";
         }
     };
@@ -66,14 +66,14 @@ export default function GanttChart({ renders = [], processes = [] }) {
 
                                         <div className={styles.processGantt}>
                                             {timeSlots.map((time) => {
-                                                const renderAtTime = visibleRenders.find(
+                                                const renderAtTime = renders.find(
                                                     (r) => r.time === time && r.id === processId
                                                 );
                                                 return (
                                                     <div key={time} className={styles.timeSlot}>
                                                         {renderAtTime && (
                                                             <div
-                                                                className={`${styles.quadradinho} ${styles.fadeIn}`}
+                                                                className={styles.quadradinho}
                                                                 style={{
                                                                     backgroundColor: getColor(renderAtTime.type),
                                                                 }}
@@ -83,6 +83,7 @@ export default function GanttChart({ renders = [], processes = [] }) {
                                                 );
                                             })}
                                         </div>
+
                                     </div>
                                 );
                             })}
