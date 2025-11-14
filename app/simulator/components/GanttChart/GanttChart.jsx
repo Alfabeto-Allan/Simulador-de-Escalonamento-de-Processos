@@ -131,12 +131,12 @@ export default function GanttChart({ renders = [], processes = [], algorithm }) 
                     <span>Sobrecarga</span>
                 </div>
                 <div className={styles.legendItem}>
-                    <div className={styles.colorBox} style={{ backgroundColor: "#413f3fff" }}></div>
-                    <span>Estouro da deadline</span>
-                </div>
-                <div className={styles.legendItem}>
                     <div className={styles.colorBoxLine} style={{ backgroundColor: "#ff00f2ff" }}></div>
                     <span>Deadline</span>
+                </div>
+                <div className={styles.legendItem}>
+                    <div className={styles.colorBox} style={{ backgroundColor: "#413f3fff" }}></div>
+                    <span>Estouro da deadline</span>
                 </div>
             </div>
         </div>
