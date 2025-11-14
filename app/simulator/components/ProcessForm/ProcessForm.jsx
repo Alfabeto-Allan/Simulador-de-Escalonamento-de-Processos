@@ -49,28 +49,27 @@ export default function ProcessForm({ processes, setProcesses, setResults }) {
     const handleTextImport = () => {
         try {
             const parsed = JSON.parse(textInput);
-
             if (!Array.isArray(parsed)) {
                 alert("O formato deve ser uma lista de objetos JSON.");
                 return;
             }
-
             const converted = parsed.map((p) => ({
-                id: p.id.toUpperCase(),
+                id: (p.id || "").toString().toUpperCase(),
                 chegada: Number(p.arrival),
                 execucao: Number(p.runtime),
                 prioridade: Number(p.priority || 0),
                 deadline: p.deadline === undefined ? null : Number(p.deadline),
             }));
 
-            setProcesses([...processes, ...converted]);
+            setResults(null);
+            setProcesses(prev => [...prev, ...converted]);
             setTextInput("");
-
             alert("Processos adicionados com sucesso!");
         } catch (err) {
             alert("Erro ao interpretar texto. Verifique se o JSON está válido.");
         }
     };
+
 
     return (
         <div className={styles.container}>

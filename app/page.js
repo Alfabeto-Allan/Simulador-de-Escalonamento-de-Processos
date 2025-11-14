@@ -20,6 +20,7 @@ export default function SimulatorPage() {
   const [loading, setLoading] = useState(false);
 
   const handleSimulate = async () => {
+    setLoading(true);
     try {
       const response = await fetch("/api/simulate", {
         method: "POST",
@@ -70,8 +71,8 @@ export default function SimulatorPage() {
         <h1 className="h1">Simulador de Escalonamento</h1>
 
         <div style={{ display: "flex", gap: "60px" }}>
-          <AlgorithmSelect config={config} setConfig={setConfig} />
-          <ConfigForm config={config} setConfig={setConfig} />
+          <AlgorithmSelect config={config} setConfig={setConfig} setResults={setResults} />
+          <ConfigForm config={config} setConfig={setConfig} setResults={setResults} />
         </div>
         <ProcessForm
           processes={processes}
