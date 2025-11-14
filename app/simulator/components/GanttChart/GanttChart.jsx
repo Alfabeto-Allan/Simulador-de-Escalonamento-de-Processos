@@ -36,7 +36,7 @@ export default function GanttChart({ renders = [], processes = [], algorithm }) 
     const minTime = Math.min(...renders.map(r => r.time), 0);
     const rawTotalSlots = maxTime - minTime + 1;
     const totalTimeSlots = Math.max(50, rawTotalSlots);
-    const timeSlots = Array.from({ length: totalTimeSlots }, (_, i) => minTime + i);
+    const timeSlots = Array.from({ length: totalTimeSlots }, (_, i) => i);
     const timelineSlots = timeSlots;
     const uniqueProcesses = [...new Set([...processes.map(p => p.id), ...renders.map(r => r.id)])].sort();
 
@@ -131,12 +131,12 @@ export default function GanttChart({ renders = [], processes = [], algorithm }) 
                     <span>Sobrecarga</span>
                 </div>
                 <div className={styles.legendItem}>
-                    <div className={styles.colorBoxLine} style={{ backgroundColor: "#ff00f2ff" }}></div>
-                    <span>Deadline</span>
-                </div>
-                <div className={styles.legendItem}>
                     <div className={styles.colorBox} style={{ backgroundColor: "#413f3fff" }}></div>
                     <span>Estouro da deadline</span>
+                </div>
+                <div className={styles.legendItem}>
+                    <div className={styles.colorBoxLine} style={{ backgroundColor: "#ff00f2ff" }}></div>
+                    <span>Deadline</span>
                 </div>
             </div>
         </div>
