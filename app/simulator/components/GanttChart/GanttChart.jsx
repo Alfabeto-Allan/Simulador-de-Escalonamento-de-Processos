@@ -67,30 +67,30 @@ export default function GanttChart({ renders = [], processes = [], algorithm }) 
 
                                         <div className={styles.processGantt}>
                                             {timeSlots.map((time) => {
-                                                const renderAtTime = renders.find(
+                                                const renderAtTime = visibleRenders.find(
                                                     (r) => r.time === time && r.id === processId
                                                 );
-                                                return (
+                                            return (
+                                            <div
+                                                key={time}
+                                                className={styles.timeSlot}
+                                                style={
+                                                    algorithm === "EDF" &&
+                                                        (process?.chegada + process?.deadline) === time
+                                                        ? { borderLeft: "2px solid #ff00f2" }
+                                                        : {}
+                                                }
+                                            >
+
+                                                {renderAtTime && (
                                                     <div
-                                                        key={time}
-                                                        className={styles.timeSlot}
-                                                        style={
-                                                            algorithm === "EDF" &&
-                                                                (process?.chegada + process?.deadline) === time
-                                                                ? { borderLeft: "2px solid #ff00f2" }
-                                                                : {}
-                                                        }
-                                                    >
+                                                        className={styles.quadradinho}
+                                                        style={{ backgroundColor: getColor(renderAtTime.type) }}
+                                                    ></div>
+                                                )}
+                                            </div>
 
-                                                        {renderAtTime && (
-                                                            <div
-                                                                className={styles.quadradinho}
-                                                                style={{ backgroundColor: getColor(renderAtTime.type) }}
-                                                            ></div>
-                                                        )}
-                                                    </div>
-
-                                                );
+                                            );
                                             })}
                                         </div>
 
