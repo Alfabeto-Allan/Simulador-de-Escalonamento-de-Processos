@@ -47,21 +47,36 @@ export default function cfs(processList, overhead) {
         queue.sort((a, b) => (a.vruntime || 0) - (b.vruntime || 0));
 
         const p = queue.shift();
-        if (
-            previous !== null &&
-            p !== previous &&
-            previous.finish === -1 &&
-            overhead > 0
-        ) {
-            for (let h = 0; h < overhead; h++) {
-                renderList.push(new Render(previous.id, "overhead", time));
-                time += 1;
-                while (nextIdx < list.length && list[nextIdx].arrival <= time) {
-                    queue.push(list[nextIdx]);
-                    console.log(
-                        `Process ${list[nextIdx].id} added to the ready queue.`
-                    );
-                    nextIdx++;
+        if (previous !== null && p !== previous && overhead > 0) {
+            if (previous.finish === -1) {
+                for (let h = 0; h < overhead; h++) {
+                    renderList.push(new Render(previous.id, "overhead", time));
+                    time += 1;
+                    while (
+                        nextIdx < list.length &&
+                        list[nextIdx].arrival <= time
+                    ) {
+                        queue.push(list[nextIdx]);
+                        console.log(
+                            `Process ${list[nextIdx].id} added to the ready queue.`
+                        );
+                        nextIdx++;
+                    }
+                }
+            } else {
+                for (let h = 0; h < overhead; h++) {
+                    renderList.push(new Render(p.id, "overhead", time));
+                    time += 1;
+                    while (
+                        nextIdx < list.length &&
+                        list[nextIdx].arrival <= time
+                    ) {
+                        queue.push(list[nextIdx]);
+                        console.log(
+                            `Process ${list[nextIdx].id} added to the ready queue.`
+                        );
+                        nextIdx++;
+                    }
                 }
             }
             contextChanges++;
@@ -73,8 +88,7 @@ export default function cfs(processList, overhead) {
         renderList.push(new Render(p.id, "exec", time));
         p.remaining -= 1;
 
-        const priorityFactor = 1024 ** (1 / p.priority);
-        p.vruntime += priorityFactor;
+        p.vruntime += Math.pow(1.25, -p.priority);
 
         time += 1;
 

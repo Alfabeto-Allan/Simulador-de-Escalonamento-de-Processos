@@ -17,13 +17,12 @@ export default function roundRobin(processList, quantum = 2, overhead = 0) {
     let contextChanges = 0;
     let completed = 0;
     let nextIdx = 0;
+    let previous = null;
 
     while (completed < totalProcesses) {
         while (nextIdx < list.length && list[nextIdx].arrival <= time) {
             queue.push(list[nextIdx]);
-            console.log(
-                `Process ${list[nextIdx].id} added to the ready queue.`
-            );
+            console.log(`Process ${list[nextIdx].id} added to the ready queue.`);
             nextIdx++;
         }
 
@@ -31,6 +30,7 @@ export default function roundRobin(processList, quantum = 2, overhead = 0) {
             if (nextIdx < list.length) {
                 idle += list[nextIdx].arrival - time;
                 time = list[nextIdx].arrival;
+                previous = null;
                 continue;
             } else {
                 break;
@@ -40,6 +40,14 @@ export default function roundRobin(processList, quantum = 2, overhead = 0) {
         queue.sort((a, b) => b.priority - a.priority);
 
         const p = queue.shift();
+
+        if (previous !== null && previous !== p && overhead > 0) {
+            for (let h = 0; h < overhead; h++) {
+                renderList.push(new Render(previous.id, "overhead", time));
+                time += 1;
+            }
+            contextChanges += 1;
+        }
 
         if (p.start === -1) {
             p.start = time;
@@ -56,24 +64,23 @@ export default function roundRobin(processList, quantum = 2, overhead = 0) {
             p.turnaround = p.finish - p.arrival + 1;
             p.wait = p.turnaround - p.runtime;
             throughputSum += p.turnaround;
-            completed += 1;
+            completed++;
+
             console.log(
                 `Process ${p.id} finished at ${p.finish} with ${p.turnaround} turnaround`
             );
+            previous = p;
         } else {
-            for (let h = 0; h < overhead; h++) {
-                renderList.push(new Render(p.id, "overhead", time));
-                time += 1;
-            }
-            contextChanges += 1;
             queue.push(p);
+            previous = p;
         }
     }
 
     const avgTurnaround =
         totalProcesses > 0 ? throughputSum / totalProcesses : 0;
     const idlePercentage = time > 0 ? (idle / time) * 100 : 0;
-    const throughput = processList.length / time;
+    const throughput = totalProcesses / time;
+
     console.log(
         `Turnaround: ${avgTurnaround.toFixed(2)}\n
         Throughput : ${throughput.toFixed(2)}\n
@@ -81,7 +88,7 @@ export default function roundRobin(processList, quantum = 2, overhead = 0) {
         Context Changes: ${contextChanges}`
     );
 
-    const output = new Output(
+    return new Output(
         renderList,
         list,
         avgTurnaround,
@@ -89,5 +96,4 @@ export default function roundRobin(processList, quantum = 2, overhead = 0) {
         idlePercentage,
         contextChanges
     );
-    return output;
 }
