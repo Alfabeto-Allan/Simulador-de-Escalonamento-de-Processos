@@ -20,7 +20,6 @@ export default function SimulatorPage() {
   const [loading, setLoading] = useState(false);
 
   const handleSimulate = async () => {
-    setLoading(true);
     try {
       const response = await fetch("/api/simulate", {
         method: "POST",

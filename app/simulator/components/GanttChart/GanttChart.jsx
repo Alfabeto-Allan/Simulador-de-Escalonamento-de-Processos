@@ -84,7 +84,7 @@ export default function GanttChart({ renders = [], processes = [], algorithm }) 
 
                                                 {renderAtTime && (
                                                     <div
-                                                        className={styles.quadradinho}
+                                                        className={`${styles.quadradinho} ${styles.fadeIn}`}
                                                         style={{ backgroundColor: getColor(renderAtTime.type) }}
                                                     ></div>
                                                 )}
