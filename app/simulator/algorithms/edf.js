@@ -91,7 +91,7 @@ export default function edf(processList, overhead) {
                 `Process ${p.id} finished at ${p.finish} with ${p.turnaround} turnaround`
             );
         } else {
-            queue.push(p);
+            queue.unshift(p);
         }
 
         previous = p;
