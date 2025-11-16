@@ -19,12 +19,18 @@ export default function roundRobin(processList, quantum = 2, overhead = 0) {
     let nextIdx = 0;
     let previous = null;
 
-    while (completed < totalProcesses) {
+    function checkArrival() {
         while (nextIdx < list.length && list[nextIdx].arrival <= time) {
             queue.push(list[nextIdx]);
-            console.log(`Process ${list[nextIdx].id} added to the ready queue.`);
+            console.log(
+                `Process ${list[nextIdx].id} added to the ready queue.`
+            );
             nextIdx++;
         }
+    }
+
+    while (completed < totalProcesses) {
+        checkArrival();
 
         if (queue.length === 0) {
             if (nextIdx < list.length) {
@@ -41,10 +47,11 @@ export default function roundRobin(processList, quantum = 2, overhead = 0) {
 
         const p = queue.shift();
 
-        if (previous !== null && previous !== p && overhead > 0) {
+        if (previous !== null && previous !== p) {
             for (let h = 0; h < overhead; h++) {
                 renderList.push(new Render(previous.id, "overhead", time));
                 time += 1;
+                checkArrival();
             }
             contextChanges += 1;
         }
@@ -57,6 +64,7 @@ export default function roundRobin(processList, quantum = 2, overhead = 0) {
             renderList.push(new Render(p.id, "exec", time));
             p.remaining -= 1;
             time += 1;
+            checkArrival();
         }
 
         if (p.remaining <= 0) {

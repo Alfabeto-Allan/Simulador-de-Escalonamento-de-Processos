@@ -19,12 +19,7 @@ export default function edf(processList, overhead) {
     let nextIdx = 0;
     let previous = null;
 
-    for (const p of list) {
-        if (p.start === undefined || p.start === null) p.start = -1;
-        if (p.finish === undefined || p.finish === null) p.finish = -1;
-    }
-
-    while (completed < totalProcesses) {
+    function checkArrival() {
         while (nextIdx < list.length && list[nextIdx].arrival <= time) {
             queue.push(list[nextIdx]);
             console.log(
@@ -32,6 +27,15 @@ export default function edf(processList, overhead) {
             );
             nextIdx++;
         }
+    }
+
+    for (const p of list) {
+        if (p.start === undefined || p.start === null) p.start = -1;
+        if (p.finish === undefined || p.finish === null) p.finish = -1;
+    }
+
+    while (completed < totalProcesses) {
+        checkArrival();
 
         if (queue.length === 0) {
             if (nextIdx < list.length) {
@@ -47,36 +51,18 @@ export default function edf(processList, overhead) {
 
         const p = queue.shift();
 
-        if (previous !== null && p !== previous && overhead > 0) {
+        if (previous !== null && p !== previous) {
             if (previous.finish === -1) {
                 for (let h = 0; h < overhead; h++) {
                     renderList.push(new Render(previous.id, "overhead", time));
                     time += 1;
-                    while (
-                        nextIdx < list.length &&
-                        list[nextIdx].arrival <= time
-                    ) {
-                        queue.push(list[nextIdx]);
-                        console.log(
-                            `Process ${list[nextIdx].id} added to the ready queue.`
-                        );
-                        nextIdx++;
-                    }
+                    checkArrival();
                 }
             } else {
                 for (let h = 0; h < overhead; h++) {
                     renderList.push(new Render(p.id, "overhead", time));
                     time += 1;
-                    while (
-                        nextIdx < list.length &&
-                        list[nextIdx].arrival <= time
-                    ) {
-                        queue.push(list[nextIdx]);
-                        console.log(
-                            `Process ${list[nextIdx].id} added to the ready queue.`
-                        );
-                        nextIdx++;
-                    }
+                    checkArrival();
                 }
             }
             contextChanges++;
